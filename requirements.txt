@@ -1,7 +1,5 @@
-sentence-transformers
-langchain
-streamlit
-ctransformers
-uvicorn
-gorq
-streamlit
+sentence-transformers==3.3.0
+langchain==0.3.7
+streamlit==1.40.0
+ctransformers==0.2.27
+uvicorn==0.32.0
