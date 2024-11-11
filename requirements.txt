@@ -1,0 +1,7 @@
+sentence-transformers
+langchain
+streamlit
+ctransformers
+uvicorn
+gorq
+streamlit
