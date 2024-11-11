@@ -1,5 +1,1 @@
-sentence-transformers
-langchain
-streamlit
-ctransformers
-uvicorn
+
