@@ -3,7 +3,7 @@ from langchain.prompts import PromptTemplate
 from langchain_community.llms import CTransformers
 
 def get_response(input_text, personality):
-    # Initialize the LLM
+
     llm = CTransformers(
         model="models/llama-2-7b-chat.ggmlv3.q2_K.bin",
         model_type="llama",
@@ -12,8 +12,7 @@ def get_response(input_text, personality):
             "temperature": 0.7
         }
     )
-    
-    # Define personality characteristics
+  
     personalities = {
         "Ved (Funny Friend)": """
         You are Ved, an 18-year-old guy known for your witty humor and sarcastic remarks. 
@@ -49,23 +48,23 @@ def get_response(input_text, personality):
     response = llm(formatted_prompt)
     return response
 
-# Page configuration
+
 st.set_page_config(
     page_title="WedBot", 
     page_icon="🤖", 
     layout="wide",
-    initial_sidebar_state="expanded"  # Changed to expanded to show sidebar by default
+    initial_sidebar_state="expanded" 
 )
 
 # Sidebar
 with st.sidebar:
     st.title("Choose Your Friend")
     personality = st.radio(
-        "",  # Empty label since we have a title above
+        "", 
         ["Ved (Funny Friend)", "Aryan (Intellectual Friend)"]
     )
     
-    # Add personality descriptions in the sidebar
+
     st.markdown("---")
     st.subheader("About Your Friends")
     
@@ -86,7 +85,7 @@ with st.sidebar:
         - Gives thoughtful advice 📚
         """)
         
-    # Clear chat button in sidebar
+
     st.markdown("---")
     if st.button("Clear Chat"):
         st.session_state.messages = []
@@ -94,31 +93,27 @@ with st.sidebar:
 
 col1, col2 = st.columns([1, 20])
 with col1:
-    # Replace 'images/bot_icon.png' with your image path
+
     st.image('4983-pepe-diamond-sword.png', width=50)
 with col2:
     st.header("WedBot")
 
 
-# Initialize chat history if not exists
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat history
+
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Chat input
-if input_text := st.chat_input("What's on your mind?"):
-    # Add user message to chat history
+if input_text := st.chat_input("What's on veds mind ?"):
+
     st.session_state.messages.append({"role": "user", "content": input_text})
     
-    # Display user message
     with st.chat_message("user"):
         st.markdown(input_text)
     
-    # Generate and display response
     with st.chat_message("assistant"):
         with st.spinner(f"{personality.split()[0]} is typing..."):
             response = get_response(input_text, personality)
